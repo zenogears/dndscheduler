@@ -1,0 +1,6 @@
+data/org.gnome.dndscheduler.desktop.in
+data/org.gnome.dndscheduler.metainfo.xml.in
+data/org.gnome.dndscheduler.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

@@ -16,8 +16,11 @@ class MainWindow(Gtk.ApplicationWindow):
         self.set_default_size(360, 720)
         self.set_title("DND Scheduler")
 
-        self.box1 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.set_child(self.box1)
+        self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.box.set_margin_top(20)
+        self.box.set_margin_start(10)
+        self.box.set_margin_end(10)
+        self.set_child(self.box)
 
         self.label_from = Gtk.Label(label="Не беспокоить с:")
         self.button_from = Gtk.Button(label=f"{cfg['main']['HOUR']}:00")
@@ -30,16 +33,16 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.button_about = Gtk.Button(label="О приложении")
 
-        self.box1.append(self.label_from)
-        self.box1.append(self.button_from)
+        self.box.append(self.label_from)
+        self.box.append(self.button_from)
 
-        self.box1.append(self.label_to)
-        self.box1.append(self.button_to)
+        self.box.append(self.label_to)
+        self.box.append(self.button_to)
 
-        self.box1.append(self.label_repeat)
-        self.box1.append(self.button_repeat)
+        self.box.append(self.label_repeat)
+        self.box.append(self.button_repeat)
 
-        self.box1.append(self.button_about)
+        self.box.append(self.button_about)
 
         self.button_from.connect('clicked', self.bfrom)
         self.button_to.connect('clicked', self.bto)
@@ -72,8 +75,8 @@ class MainWindow(Gtk.ApplicationWindow):
         dialog.set_developer_name("Chibiko")
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_comments("Application to rule schedule for Librem 5")
-        dialog.set_website("https://github.com/chibiko/dndscheduler")
-        dialog.set_issue_url("https://github.com/chibiko/dndscheduler/issues")
+        dialog.set_website("https://github.com/zenogears/dndscheduler")
+        dialog.set_issue_url("https://github.com/zenogears/dndscheduler/issues")
         dialog.add_credit_section("Contributors", ["Chibiko"])
         dialog.set_translator_credits("Chibiko")
         dialog.set_copyright("© 2023 Chibiko")

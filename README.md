@@ -1,3 +1,3 @@
 # dndscheduler
 
-A description of this project.
+GUI for crontab Do Not Disturb Scheduler for Librem 5.

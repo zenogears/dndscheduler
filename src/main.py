@@ -1,6 +1,11 @@
 import sys
 import gi
 
+import gettext
+gettext.bindtextdomain('dndscheduler', '/usr/share/locale')
+gettext.textdomain('dndscheduler')
+_ = gettext.gettext
+
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
@@ -27,18 +32,18 @@ class MainWindow(Gtk.ApplicationWindow):
         self.switch_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
 
-        self.label_from = Gtk.Label(label="Не беспокоить с:")
+        self.label_from = Gtk.Label(label=_("Do not disturb from:"))
         self.button_from = Gtk.Button(label=f"{timecreators(cfg['main']['SHOUR'])}:{timecreators(cfg['main']['SMIN'])}")
 
-        self.label_to = Gtk.Label(label="Не беспокоить до:")
+        self.label_to = Gtk.Label(label=_("Do not disturb to:"))
         self.button_to = Gtk.Button(label=f"{timecreators(cfg['main']['EHOUR'])}:{timecreators(cfg['main']['EMIN'])}")
 
-        self.label_repeat = Gtk.Label(label="Повтор:")
+        self.label_repeat = Gtk.Label(label=_("Repeat:"))
         self.button_repeat = Gtk.Button(label=f"{ret_days()}")
 
-        self.button_about = Gtk.Button(label="О приложении")
+        self.button_about = Gtk.Button(label=_("About application"))
 
-        self.label_onoff = Gtk.Label(label=f"Параметры запуска: {job_status('ENABLED')['text']}")
+        self.label_onoff = Gtk.Label(label=f"{_('Start params:')} {job_status('ENABLED')['text']}")
         self.switch_onoff = Gtk.Switch()
         self.switch_onoff.set_active(job_status("ENABLED")["status"])
         self.switch_onoff.connect("state-set", self.switch_switched, "ENABLED")
@@ -66,7 +71,7 @@ class MainWindow(Gtk.ApplicationWindow):
     def brepeat(self, brepeat):
         self.brepeat_form = Gtk.ApplicationWindow(transient_for=app.get_active_window())
         self.brepeat_form.set_default_size(360, 720)
-        self.brepeat_form.set_title("Повторять по дням:")
+        self.brepeat_form.set_title(_("Repeat on days:"))
         self.brepeat_form.show()
 
         self.box_repeat = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
@@ -86,7 +91,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self.box_day.append(self.switch_day)
             self.box_repeat.append(self.box_day)
 
-        self.button_repeat_close = Gtk.Button.new_with_mnemonic("_SAVE")
+        self.button_repeat_close = Gtk.Button.new_with_mnemonic(_("SAVE"))
         self.button_repeat_close.connect("clicked", self.on_close_clicked, self.brepeat_form)
         self.box_repeat.append(self.button_repeat_close)
 
@@ -98,14 +103,14 @@ class MainWindow(Gtk.ApplicationWindow):
         cfg = main_func()
         self.before_form = Gtk.ApplicationWindow(transient_for=app.get_active_window())
         self.before_form.set_default_size(360, 720)
-        self.before_form.set_title("Время начала")
+        self.before_form.set_title(_("Start time"))
         self.before_form.show()
 
         self.box_from = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
 
         self.before_form.set_child(self.box_from)
-        self.label_from = Gtk.Label(label = 'Выставим часы:')
-        self.label_from_min = Gtk.Label(label = 'Выставим минуты:')
+        self.label_from = Gtk.Label(label = _('Select hours:'))
+        self.label_from_min = Gtk.Label(label = _('Select minutes:'))
 
         self.hour_store = Gtk.ListStore(str)
         time = [x for x in range(0,25)]
@@ -159,14 +164,14 @@ class MainWindow(Gtk.ApplicationWindow):
         cfg = main_func()
         self.to_form = Gtk.ApplicationWindow(transient_for=app.get_active_window())
         self.to_form.set_default_size(360, 720)
-        self.to_form.set_title("Время окончания")
+        self.to_form.set_title(_("Over time"))
         self.to_form.show()
 
         self.box_to = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
 
         self.to_form.set_child(self.box_to)
-        self.label_to = Gtk.Label(label = 'Выставим часы:')
-        self.label_to_min = Gtk.Label(label = 'Выставим минуты:')
+        self.label_to = Gtk.Label(label = _('Select hours:'))
+        self.label_to_min = Gtk.Label(label = _('Select minutes:'))
 
         self.to_hour_store = Gtk.ListStore(str)
         time = [x for x in range(0,25)]
@@ -205,7 +210,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.dialog.set_version("0.2")
         self.dialog.set_developer_name("Chibiko")
         self.dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
-        self.dialog.set_comments("Application to rule schedule for Librem 5")
+        self.dialog.set_comments("Application to rule 'do not disturb' schedule for Librem 5")
         self.dialog.set_website("https://github.com/zenogears/dndscheduler")
         self.dialog.set_issue_url("https://github.com/zenogears/dndscheduler/issues")
         self.dialog.add_credit_section("Contributors", ["Chibiko"])

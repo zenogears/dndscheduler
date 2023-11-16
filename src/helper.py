@@ -6,13 +6,13 @@ from configparser import ConfigParser
 CONFIG_DIR=f"{os.path.expanduser('~')}/.config/dndscheduler"
 CONFIG_FILE=f'sleep.ini'
 
-ALLDAYS = {"MON": "Понедельник",
-        "TUE": "Вторник",
-        "WED": "Среда",
-        "THU": "Четверг",
-        "FRI": "Пятница",
-        "SAT": "Суббота",
-        "SUN": "Воскресенье"
+ALLDAYS = {"MON": _("Monday"),
+        "TUE": _("Tuesday"),
+        "WED": _("Thirsday"),
+        "THU": _("Wednsday"),
+        "FRI": _("Friday"),
+        "SAT": _("Satuday"),
+        "SUN": _("Sunday")
         }
 
 default_cfg = {
@@ -35,9 +35,9 @@ default_cfg = {
 def job_status(data):
     cfg = main_func()
     if eval(cfg["main"][data]):
-         return({"status": True, "text": "Включено"})
+         return({"status": True, "text": _("On")})
     else:
-         return({"status": False, "text": "Выключено"})
+         return({"status": False, "text": _("Off")})
 
 def ret_days():
     dayson = []
@@ -50,12 +50,12 @@ def ret_days():
         if eval(cfg["main"][i]):
             dayson.append(i)
     if len(dayson) == 7:
-        return('Everyday')
+        return(_('Everyday'))
     if dayson == workdays:
-        return('On workdays')
+        return(_('On workdays'))
     if dayson == weekends:
-        return('On weekends')
-    return(', '.join(dayson) if dayson else 'Never')
+        return(_('On weekends'))
+    return(', '.join(dayson) if dayson else _('Never'))
             
 
 def set_status(param, value):

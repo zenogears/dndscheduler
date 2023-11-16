@@ -5,9 +5,9 @@ project('dndscheduler',
 )
 
 i18n = import('i18n')
+add_project_arguments('-DGETTEXT_PACKAGE="intltest"', language:'cython')
+
 gnome = import('gnome')
-
-
 
 subdir('data')
 subdir('src')

@@ -1,5 +1,6 @@
 import os
 
+from gettext import gettext as _
 from crontab import CronTab
 from configparser import ConfigParser
 

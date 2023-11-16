@@ -1,10 +1,7 @@
 import sys
 import gi
 
-import gettext
-gettext.bindtextdomain('dndscheduler', '/usr/share/locale')
-gettext.textdomain('dndscheduler')
-_ = gettext.gettext
+from gettext import gettext as _
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')

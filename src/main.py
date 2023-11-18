@@ -8,7 +8,7 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio
 
-from helper import main_func, job_status, set_status, ALLDAYS, ret_days
+from .helper import main_func, job_status, set_status, ALLDAYS, ret_days
 
 def timecreators(timech):
     return(''.join([str(0), str(timech)]) if len(timech) < 2 else timech)

@@ -1,8 +1,9 @@
 import os
 
 from gettext import gettext as _
-from crontab import CronTab
 from configparser import ConfigParser
+import crontab
+crontab.CRON_COMMAND = "/var/run/host"
 
 CONFIG_DIR=f"{os.path.expanduser('~')}/.config/dndscheduler"
 CONFIG_FILE=f'sleep.ini'
@@ -87,7 +88,7 @@ def create_cron():
     bannersDict = {"true": "false", "false": "true"}
     status = statusDict[str(cfg["main"]["ENABLED"]).lower()] 
     status_banners = bannersDict[str(cfg["main"]["ENABLED"]).lower()]
-    cron = CronTab(user=True)
+    cron = crontab.CronTab(user=True)
     
     job_banners_on = next(cron.find_comment('BannersOn'), False)
     if not job_banners_on:

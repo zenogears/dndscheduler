@@ -3,7 +3,7 @@ import os
 from gettext import gettext as _
 from configparser import ConfigParser
 import crontab
-crontab.CRON_COMMAND = "/var/run/host"
+crontab.CRON_COMMAND = "/var/run/host/usr/bin/crontab"
 
 CONFIG_DIR=f"{os.path.expanduser('~')}/.config/dndscheduler"
 CONFIG_FILE=f'sleep.ini'
